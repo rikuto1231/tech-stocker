@@ -1,0 +1,64 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+## プロジェクト名: Tech Stocker (仮)
+
+### 1. アプリケーション概要
+
+* **目的:** 個人のWebエンジニアが、関心を持つ/利用する技術要素（ライブラリ、フレームワーク、ツール等）を記録・整理し、管理・参照を容易にするためのWebアプリケーション。エンジニアの「第二の脳」として機能し、情報散逸の防止、学習効率の向上、技術選定の効率化を目指す。
+* **ターゲットユーザー:** 個人のWebエンジニア。
+* **主要技術スタック:**
+    * バックエンドAPI: Laravel
+    * フロントエンド: React
+* **将来的な拡張:** Kotlinによる機能追加（例: GitHubリポジトリ更新通知、関連技術記事レコメンド）も視野に入れる。
+
+### 2. コア機能
+
+1.  **技術要素管理 (CRUD):**
+    * 登録項目: 技術名 (必須), 種類 (必須), ステータス (必須), 公式サイトURL, リポジトリURL, バージョン, ライセンス, 個人的なメモ (Markdown対応)。
+    * 一覧表示、詳細表示、編集、削除機能。
+2.  **タグ機能:**
+    * 技術要素に複数のタグを紐付け可能（多対多リレーション）。
+    * タグによる技術要素の絞り込み検索。
+    * (任意) タグ自体のCRUD管理機能。
+3.  **検索・フィルタリング・ソート機能:**
+    * 技術名による部分一致検索。
+    * 種類、ステータス、タグによる絞り込み。
+    * 更新日時や技術名によるソート。
+4.  **その他:**
+    * ページネーション。
+    * ユーザー認証は当面なし（シングルユーザー前提）。
+
+### 3. 主要データモデル (DB設計)
+
+1.  **`technologies` テーブル:**
+    * `id` (PK), `name` (string, required), `type` (string, required, enum: Library, Framework, Tool, etc.), `status` (string, required, enum: 調査中, 学習中, etc.), `official_url` (string, nullable), `repository_url` (string, nullable), `current_version` (string, nullable), `license` (string, nullable), `notes` (text, nullable, markdown), `created_at`, `updated_at`.
+2.  **`tags` テーブル:**
+    * `id` (PK), `name` (string, required, unique), `created_at`, `updated_at`.
+3.  **`technology_tag` テーブル (中間テーブル):**
+    * `technology_id` (FK to technologies.id), `tag_id` (FK to tags.id).
+    * Composite Primary Key: (`technology_id`, `tag_id`).
+
+### 4. 主要画面構成 (ルーティング案)
+
+* 技術要素一覧画面: `/`
+* 技術要素詳細画面: `/technologies/{id}`
+* 技術要素登録画面: `/technologies/create`
+* 技術要素編集画面: `/technologies/{id}/edit`
+* (任意) タグ管理画面: `/tags`
+
+### 5. 開発の進め方 (現在のフェーズ)
+
+* 現在、LaravelバックエンドAPIの構築フェーズ。
+* データベース設定 (SQLite)、モデルとマイグレーションの作成まで完了。
+* 次はモデル間のリレーションシップ定義、APIのルートとコントローラー作成に進む予定。
+* ローカルプロジェクトはGitで管理し、GitHubにリモートリポジトリを作成済み。
+
+### 6. 開発で重視する点
+
+* 基本的なCRUD操作を確実に実装する。
+* Reactとの連携を考慮したAPI設計。
+* 将来的な機能拡張（特にKotlinによるもの）を見据えた疎結合な設計。
+* 個人開発であり、学習目的も兼ねている。
