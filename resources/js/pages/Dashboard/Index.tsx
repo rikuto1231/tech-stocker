@@ -1,6 +1,7 @@
 import { Technology } from '@/types';
 import { Link } from '@inertiajs/react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import AppLayout from '@/layouts/AppLayout';
 
 interface Props {
     typeDistribution: {
@@ -23,19 +24,13 @@ const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'
 
 export default function Index({ typeDistribution, statusDistribution, statistics }: Props) {
     return (
-        <div className="min-h-screen bg-white text-gray-900">
-            <div className="py-12">
+        <AppLayout>
+            <div className="py-8">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div className="p-6">
                             <div className="flex justify-between items-center mb-8">
                                 <h1 className="text-3xl font-bold text-gray-900">技術スタックダッシュボード</h1>
-                                <Link
-                                    href={route('technologies.index')}
-                                    className="inline-flex items-center px-4 py-2 bg-gray-100 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                >
-                                    技術一覧に戻る
-                                </Link>
                             </div>
 
                             {/* 概要統計 */}
@@ -195,6 +190,6 @@ export default function Index({ typeDistribution, statusDistribution, statistics
                     </div>
                 </div>
             </div>
-        </div>
+        </AppLayout>
     );
 } 

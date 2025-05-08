@@ -1,6 +1,7 @@
 import { Link, router } from '@inertiajs/react';
 import { Technology, Tag } from '@/types';
 import { FormEvent, useState, useMemo, useEffect } from 'react';
+import AppLayout from '@/layouts/AppLayout';
 
 interface Props {
     technologies: {
@@ -175,26 +176,14 @@ export default function Index({ technologies, tags, filters }: Props) {
     }, [tags, tagSearch]);
 
     return (
-        <div className="min-h-screen bg-white text-gray-900">
-            <div className="py-12">
+        <AppLayout>
+            <div className="py-8">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div className="p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <h1 className="text-3xl font-bold text-gray-900">技術要素一覧</h1>
                                 <div className="space-x-4">
-                                    <Link
-                                        href={route('dashboard')}
-                                        className="inline-flex items-center px-4 py-2 bg-gray-100 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                    >
-                                        ダッシュボード
-                                    </Link>
-                                    <Link
-                                        href={route('tags.index')}
-                                        className="inline-flex items-center px-4 py-2 bg-gray-100 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                    >
-                                        タグ管理
-                                    </Link>
                                     <Link
                                         href={route('technologies.create')}
                                         className="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150"
@@ -526,6 +515,6 @@ export default function Index({ technologies, tags, filters }: Props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </AppLayout>
     );
 } 
