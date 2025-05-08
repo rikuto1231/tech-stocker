@@ -6,6 +6,8 @@ use App\Models\Technology;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
+use League\Csv\Writer;
 
 class TechnologyController extends Controller
 {
@@ -169,5 +171,71 @@ class TechnologyController extends Controller
 
         return redirect()->route('technologies.index')
             ->with('success', '選択した技術要素のタグを更新しました。');
+    }
+
+    public function export(Request $request, Technology $technology = null)
+    {
+        \Log::info('Export request received', [
+            'technology' => $technology ? $technology->id : null,
+            'has_ids' => $request->has('ids'),
+            'ids' => $request->input('ids'),
+            'all_params' => $request->all()
+        ]);
+
+        if ($technology) {
+            // 個別の技術要素のエクスポート
+            $technologies = collect([$technology]);
+            $filename = "technology_{$technology->id}.csv";
+            \Log::info('Exporting single technology', ['id' => $technology->id]);
+        } else {
+            // 全技術要素のエクスポート
+            $technologies = Technology::with('tags')->get();
+            $filename = "technologies.csv";
+            \Log::info('Exporting all technologies');
+        }
+        
+        $csv = Writer::createFromString('');
+        
+        // ヘッダー行の追加
+        $csv->insertOne([
+            'ID',
+            '技術名',
+            '種類',
+            'ステータス',
+            '現在のバージョン',
+            'ライセンス',
+            'メモ',
+            'タグ',
+            '作成日',
+            '更新日'
+        ]);
+
+        // データ行の追加
+        foreach ($technologies as $tech) {
+            $csv->insertOne([
+                $tech->id,
+                $tech->name,
+                $tech->type,
+                $tech->status,
+                $tech->current_version,
+                $tech->license,
+                $tech->notes,
+                $tech->tags->pluck('name')->join(', '),
+                $tech->created_at,
+                $tech->updated_at
+            ]);
+        }
+
+        \Log::info('CSV generation completed', [
+            'filename' => $filename,
+            'row_count' => $technologies->count()
+        ]);
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        return response($csv->toString(), 200, $headers);
     }
 } 

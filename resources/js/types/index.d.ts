@@ -41,3 +41,28 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Tag {
+    id: number;
+    name: string;
+    description?: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Technology {
+    id: number;
+    name: string;
+    type: string;
+    type_label: string;
+    status: string;
+    status_label: string;
+    official_url?: string;
+    repository_url?: string;
+    current_version?: string;
+    license?: string;
+    notes?: string;
+    created_at: string;
+    updated_at: string;
+    tags: Tag[];
+}
