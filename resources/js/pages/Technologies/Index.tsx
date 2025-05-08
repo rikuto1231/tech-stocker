@@ -175,23 +175,23 @@ export default function Index({ technologies, tags, filters }: Props) {
     }, [tags, tagSearch]);
 
     return (
-        <div className="min-h-screen bg-gray-900 text-gray-100">
+        <div className="min-h-screen bg-white text-gray-900">
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                    <div className="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div className="p-6">
                             <div className="flex justify-between items-center mb-6">
-                                <h1 className="text-3xl font-bold text-gray-100">技術要素一覧</h1>
+                                <h1 className="text-3xl font-bold text-gray-900">技術要素一覧</h1>
                                 <div className="space-x-4">
                                     <Link
                                         href={route('dashboard')}
-                                        className="inline-flex items-center px-4 py-2 bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-100 uppercase tracking-widest hover:bg-gray-600 focus:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        className="inline-flex items-center px-4 py-2 bg-gray-100 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         ダッシュボード
                                     </Link>
                                     <Link
                                         href={route('tags.index')}
-                                        className="inline-flex items-center px-4 py-2 bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-100 uppercase tracking-widest hover:bg-gray-600 focus:bg-gray-600 active:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        className="inline-flex items-center px-4 py-2 bg-gray-100 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200 focus:bg-gray-200 active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         タグ管理
                                     </Link>
@@ -211,7 +211,7 @@ export default function Index({ technologies, tags, filters }: Props) {
                                         value={search}
                                         onChange={e => setSearch(e.target.value)}
                                         placeholder="技術名、種類、ステータスなどで検索..."
-                                        className="flex-1 rounded-md border-gray-600 bg-gray-700 text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                     />
                                     <button
                                         type="submit"
@@ -233,13 +233,13 @@ export default function Index({ technologies, tags, filters }: Props) {
 
                             <div className="mb-6">
                                 <div className="flex items-center space-x-4">
-                                    <span className="text-sm font-medium text-gray-300">タグでフィルター：</span>
+                                    <span className="text-sm font-medium text-gray-700">タグでフィルター：</span>
                                     <button
                                         onClick={() => handleTagFilter(null)}
                                         className={`px-3 py-1 text-sm rounded-full transition-colors duration-200 ${
                                             !filters.tag_id
                                                 ? 'bg-blue-600 text-white'
-                                                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                         }`}
                                     >
                                         すべて
@@ -251,7 +251,7 @@ export default function Index({ technologies, tags, filters }: Props) {
                                             className={`px-3 py-1 text-sm rounded-full transition-colors duration-200 ${
                                                 filters.tag_id === String(tag.id)
                                                     ? 'bg-blue-600 text-white'
-                                                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                             }`}
                                         >
                                             {tag.name}
@@ -262,7 +262,7 @@ export default function Index({ technologies, tags, filters }: Props) {
 
                             {selectedIds.length > 0 && (
                                 <div className="mb-4 flex items-center justify-between">
-                                    <div className="text-sm text-gray-300">
+                                    <div className="text-sm text-gray-700">
                                         {selectedIds.length}件選択中
                                     </div>
                                     <div className="space-x-4">
@@ -289,59 +289,59 @@ export default function Index({ technologies, tags, filters }: Props) {
                             )}
 
                             <div className="overflow-x-auto">
-                                <table className="min-w-full divide-y divide-gray-600">
-                                    <thead className="bg-gray-700">
+                                <table className="min-w-full divide-y divide-gray-200">
+                                    <thead className="bg-gray-100">
                                         <tr>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                                                 <input
                                                     type="checkbox"
                                                     checked={selectedIds.length === technologies.data.length}
                                                     onChange={handleSelectAll}
-                                                    className="rounded border-gray-600 bg-gray-700 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                    className="rounded border-gray-300 bg-white text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                                 />
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('name')}>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('name')}>
                                                 技術名 {getSortIcon('name')}
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('type')}>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('type')}>
                                                 種類 {getSortIcon('type')}
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('status')}>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('status')}>
                                                 ステータス {getSortIcon('status')}
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                                                 タグ
                                             </th>
-                                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                            <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase tracking-wider">
                                                 操作
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody className="bg-gray-800 divide-y divide-gray-600">
+                                    <tbody className="bg-white divide-y divide-gray-200">
                                         {filteredTechnologies.map((technology) => (
-                                            <tr key={technology.id} className="hover:bg-gray-700 transition-colors duration-150">
+                                            <tr key={technology.id} className="hover:bg-gray-50 transition-colors duration-150">
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <input
                                                         type="checkbox"
                                                         checked={selectedIds.includes(technology.id)}
                                                         onChange={() => handleSelect(technology.id)}
-                                                        className="rounded border-gray-600 bg-gray-700 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                        className="rounded border-gray-300 bg-white text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                                                     />
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <Link
                                                         href={route('technologies.show', { technology: technology.id })}
-                                                        className="text-blue-400 hover:text-blue-300"
+                                                        className="text-blue-600 hover:text-blue-800"
                                                     >
                                                         {technology.name}
                                                     </Link>
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-gray-300">{technology.type}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-gray-700">{technology.type}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                                        technology.status === 'アクティブ' ? 'bg-green-900 text-green-300' :
-                                                        technology.status === '非推奨' ? 'bg-yellow-900 text-yellow-300' :
-                                                        'bg-gray-900 text-gray-300'
+                                                        technology.status === 'アクティブ' ? 'bg-green-100 text-green-800' :
+                                                        technology.status === '非推奨' ? 'bg-yellow-100 text-yellow-800' :
+                                                        'bg-gray-100 text-gray-800'
                                                     }`}>
                                                         {technology.status}
                                                     </span>
@@ -351,7 +351,7 @@ export default function Index({ technologies, tags, filters }: Props) {
                                                         {technology.tags.map((tag) => (
                                                             <span
                                                                 key={tag.id}
-                                                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-700 text-gray-300"
+                                                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
                                                             >
                                                                 {tag.name}
                                                             </span>
@@ -362,31 +362,21 @@ export default function Index({ technologies, tags, filters }: Props) {
                                                     <div className="space-x-2">
                                                         <Link
                                                             href={route('technologies.show', { technology: technology.id })}
-                                                            className="text-blue-400 hover:text-blue-300"
+                                                            className="text-blue-600 hover:text-blue-800"
                                                         >
                                                             詳細
                                                         </Link>
                                                         <Link
                                                             href={route('technologies.edit', { technology: technology.id })}
-                                                            className="text-blue-400 hover:text-blue-300"
+                                                            className="text-blue-600 hover:text-blue-800"
                                                         >
                                                             編集
                                                         </Link>
                                                         <button
                                                             onClick={() => handleExportSingle(technology.id)}
-                                                            className="text-blue-400 hover:text-blue-300"
+                                                            className="text-blue-600 hover:text-blue-800"
                                                         >
                                                             エクスポート
-                                                        </button>
-                                                        <button
-                                                            onClick={() => {
-                                                                if (confirm('本当に削除しますか？')) {
-                                                                    router.delete(route('technologies.destroy', technology.id));
-                                                                }
-                                                            }}
-                                                            className="text-red-400 hover:text-red-300"
-                                                        >
-                                                            削除
                                                         </button>
                                                     </div>
                                                 </td>
@@ -398,7 +388,7 @@ export default function Index({ technologies, tags, filters }: Props) {
 
                             <div className="mt-6">
                                 <div className="flex items-center justify-between">
-                                    <div className="text-sm text-gray-300">
+                                    <div className="text-sm text-gray-700">
                                         全 {technologies.total} 件中 {technologies.data.length} 件を表示
                                     </div>
                                     <div className="flex items-center space-x-2">
@@ -411,8 +401,8 @@ export default function Index({ technologies, tags, filters }: Props) {
                                                         disabled={!link.url}
                                                         className={`px-3 py-1 rounded-md text-sm ${
                                                             link.url
-                                                                ? 'text-gray-300 hover:bg-gray-700'
-                                                                : 'text-gray-500 cursor-not-allowed'
+                                                                ? 'text-gray-700 hover:bg-gray-100'
+                                                                : 'text-gray-400 cursor-not-allowed'
                                                         }`}
                                                     >
                                                         前へ
@@ -427,8 +417,8 @@ export default function Index({ technologies, tags, filters }: Props) {
                                                         disabled={!link.url}
                                                         className={`px-3 py-1 rounded-md text-sm ${
                                                             link.url
-                                                                ? 'text-gray-300 hover:bg-gray-700'
-                                                                : 'text-gray-500 cursor-not-allowed'
+                                                                ? 'text-gray-700 hover:bg-gray-100'
+                                                                : 'text-gray-400 cursor-not-allowed'
                                                         }`}
                                                     >
                                                         次へ
@@ -442,7 +432,7 @@ export default function Index({ technologies, tags, filters }: Props) {
                                                     className={`px-3 py-1 rounded-md text-sm ${
                                                         link.active
                                                             ? 'bg-blue-600 text-white'
-                                                            : 'text-gray-300 hover:bg-gray-700'
+                                                            : 'text-gray-700 hover:bg-gray-100'
                                                     }`}
                                                 >
                                                     {link.label}

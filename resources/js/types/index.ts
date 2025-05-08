@@ -20,4 +20,9 @@ export interface Tag {
     created_at: string;
     updated_at: string;
     technologies_count?: number;
+}
+
+export interface BreadcrumbItem {
+    title: string;
+    href: string;
 } 
