@@ -20,6 +20,15 @@ export default defineConfig({
     resolve: {
         alias: {
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
+            '@': resolve(__dirname, 'resources/js'),
+            '~': resolve(__dirname, 'resources/js'),
+        },
+    },
+    build: {
+        rollupOptions: {
+            input: {
+                app: 'resources/js/app.tsx',
+            },
         },
     },
 });
