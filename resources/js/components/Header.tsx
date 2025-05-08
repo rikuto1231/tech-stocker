@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import NotificationBell from '../components/NotificationBell';
 
 export default function Header() {
     return (
@@ -29,6 +30,7 @@ export default function Header() {
                         >
                             タグ管理
                         </Link>
+                        <NotificationBell />
                     </nav>
                 </div>
             </div>
